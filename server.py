@@ -1,6 +1,8 @@
 from socket import socket
 from struct import unpack
 
+ACK = "ACK!"
+
 ACTION = "rb"
 
 THANK_YOU_FOR_ASKING_ = "Hey client I'm good, thank you for asking!"
@@ -13,7 +15,7 @@ BACKLOG = 1
 
 IP = "127.0.0.1"
 
-PORT = 8200
+PORT = 9999
 
 
 def open_main_socket()->socket:
@@ -39,8 +41,9 @@ def handle_file(user_socket):
 
 def handle_cases(user_socket):
     """handle with the 3 cases 1-exit 2-download file 3-how is the server"""
-    recv_data=unpack(FORMAT, user_socket.recv(BUFSIZE))
+    recv_data=unpack(FORMAT, user_socket.recv(BUFSIZE))[0]
     while recv_data:
+        user_socket.send(ACK.encode())
         if recv_data==1:
             "Ended communication and close sockets-> server side!"
             break
