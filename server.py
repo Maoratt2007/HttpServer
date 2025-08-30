@@ -15,7 +15,7 @@ BACKLOG = 1
 
 IP = "127.0.0.1"
 
-PORT = 9999
+PORT = 8888
 
 
 def open_main_socket()->socket:
@@ -54,6 +54,7 @@ def handle_cases(user_socket):
         elif recv_data==3:
             user_socket.send(THANK_YOU_FOR_ASKING_.encode())
             print("Sent OK message to the client!")
+        recv_data = unpack(FORMAT, user_socket.recv(BUFSIZE))[0]
 def main():
     main_socket=open_main_socket()
     user_socket,addr=main_socket.accept()
