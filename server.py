@@ -26,8 +26,8 @@ class ServerHttp:
     def open_main_socket(self) -> socket:
         """open and return the main socket->from him, we'll do client_socket"""
         main_socket = socket()
-        main_socket.bind((IP, PORT))
-        main_socket.listen(BACKLOG)
+        main_socket.bind((self.ip, self.port))
+        main_socket.listen(self.backlog)
         print("Main socket has opened!")
         return main_socket
 
